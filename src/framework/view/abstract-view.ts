@@ -1,4 +1,3 @@
-import {createElement} from '../render.js';
 import './abstract-view.css';
 
 /** @const {string} Класс, реализующий эффект "покачивания головой" */
@@ -10,29 +9,26 @@ const SHAKE_ANIMATION_TIMEOUT = 600;
 /**
  * Абстрактный класс представления
  */
-export default class AbstractView {
+export class AbstractView {
   /** @type {HTMLElement|null} Элемент представления */
-  #element = null;
-
-  /** @type {Object} Объект с колбэками. Может использоваться для хранения обработчиков событий */
-  _callback = {};
-
-  constructor() {
-    if (new.target === AbstractView) {
-      throw new Error('Can\'t instantiate AbstractView, only concrete one.');
-    }
-  }
+  private _element: HTMLElement | null = null;
 
   /**
    * Геттер для получения элемента
    * @returns {HTMLElement} Элемент представления
    */
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  get element(): HTMLElement {
+    return this._element;
+  }
 
-    return this.#element;
+
+  /** @type {Object} Объект с колбэками. Может использоваться для хранения обработчиков событий */
+  private _callback = {};
+
+  constructor() {
+    if (new.target === AbstractView) {
+      throw new Error('Can\'t instantiate AbstractView, only concrete one.');
+    }
   }
 
   /**
@@ -46,14 +42,14 @@ export default class AbstractView {
 
   /** Метод для удаления элемента */
   removeElement() {
-    this.#element = null;
+    this._element = null;
   }
 
   /**
    * Метод, реализующий эффект "покачивания головой"
    * @param {shakeCallback} [callback] Функция, которая будет вызвана после завершения анимации
    */
-  shake(callback) {
+  shake(callback: Function) {
     this.element.classList.add(SHAKE_CLASS_NAME);
     setTimeout(() => {
       this.element.classList.remove(SHAKE_CLASS_NAME);

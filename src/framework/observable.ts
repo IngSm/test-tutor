@@ -3,22 +3,22 @@
  */
 export default class Observable {
   /** @type {Set<observerCallback>} Множество функций типа observerCallback */
-  #observers = new Set();
+  private observers = new Set();
 
   /**
    * Метод, позволяющий подписаться на событие
    * @param {observerCallback} observer Функция, которая будет вызвана при наступлении события
    */
-  addObserver(observer) {
-    this.#observers.add(observer);
+  addObserver(observer: any) {
+    this.observers.add(observer);
   }
 
   /**
    * Метод, позволяющий отписаться от события
    * @param {observerCallback} observer Функция, которую больше не нужно вызывать при наступлении события
    */
-  removeObserver(observer) {
-    this.#observers.delete(observer);
+  removeObserver(observer: any) {
+    this.observers.delete(observer);
   }
 
   /**
@@ -26,8 +26,8 @@ export default class Observable {
    * @param {*} event Тип события
    * @param {*} payload Дополнительная информация
    */
-  _notify(event, payload) {
-    this.#observers.forEach((observer) => observer(event, payload));
+  private _notify(event: string, payload: string) {
+    this.observers.forEach((observer: any) => observer(event, payload));
   }
 }
 
