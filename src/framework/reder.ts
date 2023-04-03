@@ -1,4 +1,4 @@
-import AbstractView from './view/abstract-view.js';
+import { AbstractView } from './view/abstract-view';
 
 /** @enum {string} Перечисление возможных позиций для отрисовки */
 enum RenderPosition {
@@ -13,11 +13,11 @@ enum RenderPosition {
  * @param {string} template Разметка в виде строки
  * @returns {HTMLElement} Созданный элемент
  */
-function createElement(template: string) {
+function createElement(template: string): HTMLElement {
   const newElement = document.createElement('div');
   newElement.innerHTML = template;
 
-  return newElement.firstElementChild;
+  return newElement.firstElementChild as HTMLElement;
 }
 
 /**
@@ -26,7 +26,7 @@ function createElement(template: string) {
  * @param {HTMLElement} container Элемент в котором будет отрисован компонент
  * @param {string} place Позиция компонента относительно контейнера. По умолчанию - `beforeend`
  */
-function render(component: AbstractView, container: HTMLElement, place = RenderPosition.BEFOREEND) {
+function render(component: AbstractView, container: Element, place = RenderPosition.BEFOREEND) {
   if (!(component instanceof AbstractView)) {
     throw new Error('Can render only components');
   }

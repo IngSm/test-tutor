@@ -1,4 +1,4 @@
-import './abstract-view.css';
+// import './abstract-view.css';
 
 /** @const {string} Класс, реализующий эффект "покачивания головой" */
 const SHAKE_CLASS_NAME = 'shake';

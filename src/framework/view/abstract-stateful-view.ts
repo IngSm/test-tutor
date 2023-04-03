@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view.js';
+import { AbstractView } from './abstract-view';
 
 /**
  * Абстрактный класс представления с состоянием
@@ -11,14 +11,14 @@ export default class AbstractStatefulView extends AbstractView {
    * Метод для обновления состояния и перерисовки элемента
    * @param {Object} update Объект с обновлённой частью состояния
    */
-  updateElement(update) {
+  updateElement(update: Element) {
     if (!update) {
       return;
     }
 
     this._setState(update);
 
-    this.#rerenderElement();
+    this.rerenderElement();
   }
 
   /**
@@ -33,12 +33,12 @@ export default class AbstractStatefulView extends AbstractView {
    * Метод для обновления состояния
    * @param {Object} update Объект с обновлённой частью состояния
    */
-  _setState(update) {
+  _setState(update: Element) {
     this._state = structuredClone({...this._state, ...update});
   }
 
   /** Метод для перерисовки элемента */
-  #rerenderElement() {
+  private rerenderElement() {
     const prevElement = this.element;
     const parent = prevElement.parentElement;
     this.removeElement();

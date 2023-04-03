@@ -10,8 +10,7 @@ module.exports = {
     clean: true
   },
   devServer: {
-    static: './bundle',
-    hot: true,
+    static: './public'
   },
   devtool: 'source-map',
   module: {
@@ -21,7 +20,10 @@ module.exports = {
         exclude: /(node_modules)/,
         use: ['babel-loader']
       },
-      { test: /\.css$/, use: ['css-loader', 'style-loader'] },
+      {
+        test: /\.css$/,
+        use: ['css-loader', 'style-loader'],
+      },
       {
         test: /\.ts$/,
         exclude: [/node_modules/],
@@ -34,5 +36,7 @@ module.exports = {
       patterns: [{ from: 'public' }],
     }),
   ],
-  resolve: { extensions: ['.ts'] },
+  resolve: {
+    extensions: [".wasm", ".ts", ".tsx", ".mjs", ".cjs", ".js", ".json"],
+  },
 };
