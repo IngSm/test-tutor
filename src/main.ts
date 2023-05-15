@@ -1,7 +1,13 @@
-import { MainView }  from "./view/index";
-import { render } from "./framework";
+import "./style.css";
 
-const appEntry = document.querySelector("#app")
+import MainViewPresenter from "./presenter/main-view-presenter";
+import { NasaImage } from "./model/nasa_image";
 
-render(MainView, appEntry);
+const appEntry: HTMLElement = document.querySelector("#app");
+
+const nasaModel = new NasaImage()
+
+const mainViewPresenter = new MainViewPresenter({container: appEntry}, {model: nasaModel})
+
+mainViewPresenter.init();
 

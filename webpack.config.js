@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['css-loader', 'style-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.ts$/,
@@ -35,6 +36,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: 'public' }],
     }),
+    new Dotenv({
+      path: "./.env",
+      safe: true
+    })
   ],
   resolve: {
     extensions: [".wasm", ".ts", ".tsx", ".mjs", ".cjs", ".js", ".json"],
